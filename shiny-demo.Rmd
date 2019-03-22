@@ -1,0 +1,52 @@
+---
+title: "Shiny Demo"
+author: "Cory J. Cascalheira"
+date: "March 22, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(shiny)
+```
+
+# Shiny Basics
+___
+Two parts to every Shiny app: a web page that shows the app and a server. Necessary to write the *user interface* and *server*. The *UI* shows the user visuals and possible options while the *server* display nothing. Rather, it is the underlying logic.
+
+Navigate to the `demo_app` folder to see an example of an empty `app.R`, the file that initializes the Shiny app.
+
+If the app is complex, it is possible to define it as two separate files: `ui.R` and `server.R`. These have to be in the same folder, but cannot be in a folder with `app.R`.
+
+## Build the Basic UI
+___
+Add character strings to add text to a Shiny app.
+
+Format text with functions named after HTML tags, such as `h1()`, `a()`, and `strong()`. It is possible to add style with something like `div("this is blue", style = "color: blue;")`.
+
+Shiny comes with a special, improved version of h1 tags called `titlePanel()`.
+
+Specify layout with `sidebarLayout()`. To see the HTML structure, simply `print(ui)`.
+
+### Shiny Inputs & Outputs
+___
+In order for a user to interact with the server, inputs are necessary.
+
+![Types of Shiny Inputs](shiny-inputs.png)
+
+All inputs have two main arguments:
+
+1. `inputId` = must be unique; allows the shiny server to interact with the UI
+2. `label` = the text associated with the input
+
+Outputs also must match by `outputId`, which must be unique.
+
+# Server Logic = Outputs
+___
+In a single script app, the `server` variable listens to input changes. The `server()` requires two arguments: `input` and `output`. These mandatory arguments are lists.
+
+For example, to render a plot in the `mainPanel()`, use ggplot2 code within `renderPlot()`.
